@@ -6,23 +6,17 @@ using UnityEngine;
 public class GrabbableObject : MonoBehaviour
 {
     [SerializeField] private Color m_highlightedColor = Color.green;
-
+    [SerializeField] private float m_throwForce = 1000f;
+    
+    private List<Vector3> m_trackedPositions = new List<Vector3>();
     private Color m_originalColor;
     private Renderer m_rend;
-
-    private List<Vector3> m_trackedPositions = new List<Vector3>();
     private bool m_isHeld;
-
     protected bool m_isThrown = false;
-
-    [SerializeField] private float m_throwForce = 1000f;
-
-    
-    
 
     private int m_maxTrackedPositions = 15;
 
-    private void Start()
+     private void Start()
     {
         m_rend = GetComponent<Renderer>();
         m_originalColor = m_rend.material.color;
@@ -38,9 +32,7 @@ public class GrabbableObject : MonoBehaviour
         m_rend.material.color = m_originalColor;
     }
 
-    
-
-    private void Update()
+    public virtual void Update()
     {
         if(m_isHeld)
         {
@@ -54,10 +46,7 @@ public class GrabbableObject : MonoBehaviour
 
     public void OnGrabStart(Grabber hand)
     {
-        //transform.parent = hand.transform;
-        //GetComponent<Rigidbody>().isKinematic = true;
-
-        
+         
         FixedJoint fx = gameObject.AddComponent<FixedJoint>();
         fx.breakForce = 50000f;
         fx.breakTorque = 50000f;
@@ -74,7 +63,6 @@ public class GrabbableObject : MonoBehaviour
         transform.parent = null;
         if (GetComponent<FixedJoint>())
         {
-            Debug.Log("In OnGrabEnd()");
             Destroy(GetComponent<FixedJoint>());
             Vector3 direction = m_trackedPositions[m_trackedPositions.Count - 1] - m_trackedPositions[0];
             GetComponent<Rigidbody>().AddForce(direction * m_throwForce);

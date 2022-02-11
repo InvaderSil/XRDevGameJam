@@ -7,9 +7,12 @@ using DG.Tweening;
 public class PullableObject : MonoBehaviour
 {
     [SerializeField] private Color m_highlightedColor = Color.green;
+    [SerializeField] private float m_shootForce = 200f;
 
     private Color m_originalColor;
     private Renderer m_rend;
+    private Transform m_blowerPos;
+    private DG.Tweening.Core.TweenerCore<Vector3, Vector3, DG.Tweening.Plugins.Options.VectorOptions> m_dotweener;
 
     private void Start()
     {
@@ -27,41 +30,63 @@ public class PullableObject : MonoBehaviour
         m_rend.material.color = m_originalColor;
     }
 
-    public void OnGrabStart(LeafBlower hand)
+    public void OnTriggerStart(GameObject nozzlePoint)
     {
         //transform.parent = hand.transform;
         GetComponent<Rigidbody>().isKinematic = true;
 
-        var blowerPos = hand.GetComponentInChildren<NozzlePoint>();
+        m_blowerPos = nozzlePoint.transform;
 
-        transform.DOMove(blowerPos.transform.position, 3f);
+        //Debug.Log("m_blowerPos = " + m_blowerPos);
 
+        var boxCollider = GetComponent<BoxCollider>();
+        var estimatedRadius = boxCollider.size/2;
+
+        m_dotweener = transform.DOMove(m_blowerPos.position + estimatedRadius, 3f);
+        
         FixedJoint fx = gameObject.AddComponent<FixedJoint>();
         fx.breakForce = 50000f;
         fx.breakTorque = 50000f;
-        fx.connectedBody = hand.GetComponent<Rigidbody>();
 
+        Rigidbody nozzleRB; 
+        if (nozzlePoint.TryGetComponent<Rigidbody>(out nozzleRB))
+        {
+            fx.connectedBody = nozzleRB;
+        }
+        else
+        {
+            Debug.Log("failed to get RigidBody for FixedJoint in PullableObject");
+        }
         // Make sure you create the FixedJoint first before making the parent
-        transform.parent = hand.transform;
+        transform.parent = nozzlePoint.transform;
         //m_trackedPositions.Clear();
         //m_isHeld = true;
     }
 
     
 
-    public virtual void OnGrabEnd()
+    public virtual void OnTriggerEnd()
     {
         transform.parent = null;
-        if (GetComponent<FixedJoint>())
+
+        if (TryGetComponent<FixedJoint>(out FixedJoint fj))
         {
-            Debug.Log("In OnGrabEnd()");
-            Destroy(GetComponent<FixedJoint>());
-            //Vector3 direction = m_trackedPositions[m_trackedPositions.Count - 1] - m_trackedPositions[0];
-            //GetComponent<Rigidbody>().AddForce(direction * m_throwForce);
-            //Debug.Log(direction * m_throwForce);
-            //m_isHeld = false;
-            //m_isThrown = true;
-            GetComponent<Rigidbody>().isKinematic = true;
+            
+            GetComponent<Rigidbody>().isKinematic = false;
+                        
+            Destroy(fj);
+
+            if (m_dotweener.IsPlaying())
+            {
+                m_dotweener.Kill();
+                GetComponent<Rigidbody>().useGravity = true;
+                return;
+            }
+
+            Rigidbody localRB = GetComponent<Rigidbody>();
+            localRB.useGravity = false;
+            GetComponent<Rigidbody>().AddForce(m_blowerPos.forward * m_shootForce);
+            
         }
 
     }
@@ -72,13 +97,5 @@ public class PullableObject : MonoBehaviour
 
     }
 
-    public virtual void OnTriggerDown()
-    {
-
-    }
-
-    public virtual void OnTriggerUp()
-    {
-
-    }
+    
 }
