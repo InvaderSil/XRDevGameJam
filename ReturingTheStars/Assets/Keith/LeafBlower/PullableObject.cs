@@ -40,7 +40,9 @@ public class PullableObject : MonoBehaviour
         //Debug.Log("m_blowerPos = " + m_blowerPos);
 
         var boxCollider = GetComponent<BoxCollider>();
-        var estimatedRadius = boxCollider.size/2;
+        var renderer = GetComponent<Renderer>();
+        var estimatedRadius = renderer.bounds.size / 2;
+        //var estimatedRadius = boxCollider.size/2;
 
         m_dotweener = transform.DOMove(m_blowerPos.position + estimatedRadius, 3f);
         
