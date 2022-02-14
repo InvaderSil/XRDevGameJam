@@ -37,8 +37,13 @@ public class StarCapture : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // We only want one object here
+        if(m_isComplete)
+        {
+            return;
+        }
+
         // pull the other to the center
-        
         m_dotweener = other.transform.DOMove(transform.position, m_pullSpeed);
         other.GetComponent<Rigidbody>().velocity = Vector3.zero;
         other.GetComponent<Collider>().enabled = false;
