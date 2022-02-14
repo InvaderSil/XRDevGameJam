@@ -63,7 +63,7 @@ public class Grabber : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         GrabbableObject go = other.GetComponent<GrabbableObject>();
-        Debug.Log("OnTriggerEntered");
+        //Debug.Log("OnTriggerEntered");
         if (go != null)
         {
             m_hoveredObject = go;
@@ -74,7 +74,7 @@ public class Grabber : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         GrabbableObject go = other.GetComponent<GrabbableObject>();
-        Debug.Log("OnTriggerExit");
+        //Debug.Log("OnTriggerExit");
         if(go != null)
         {
             go.OnHoverEnd();

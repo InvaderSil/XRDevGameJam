@@ -22,34 +22,7 @@ public class PullableObject : MonoBehaviour
     private void Start()
     {
         m_rend = GetComponent<Renderer>();
-        //m_originalColor = m_rend.material.color;
-
-        //m_outlineRenderer = CreateOutline(m_outlineMaterial, m_outlineScaleFactor, m_outlineColor);
-        //m_outlineRenderer.enabled = false;
     }
-
-    //private Renderer CreateOutline(Material outlineMaterial, float outlineScaleFactor, Color outlineColor)
-    //{
-        
-    //    Debug.Log("1 in CreateOutline");
-    //    GameObject outlineObject = Instantiate(this.gameObject, transform.position, transform.rotation, transform);
-    //    Renderer rend = outlineObject.GetComponent<Renderer>();
-
-    //    rend.material = m_outlineMaterial;
-    //    rend.material.SetColor("_OutlineColor", outlineColor);
-    //    rend.material.SetFloat("_Scale", outlineScaleFactor);
-    //    rend.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-
-    //    outlineObject.GetComponent<OutlineScript>().enabled = false;
-    //    outlineObject.GetComponent<Collider>().enabled = false;
-    //    outlineObject.GetComponent<Rigidbody>().isKinematic = true;
-
-    //    outlineObject.transform.parent = this.gameObject.transform;
-
-    //    rend.enabled = false;
-
-    //    return rend;
-    //}
 
     public virtual void OnHoverStart()
     {
@@ -123,7 +96,27 @@ public class PullableObject : MonoBehaviour
             Rigidbody localRB = GetComponent<Rigidbody>();
             localRB.useGravity = false;
             GetComponent<Rigidbody>().AddForce(m_blowerPos.forward * m_shootForce);
+
             
+
+
+            var spawnStar = GetComponent<SpawnStar>();
+            if(spawnStar == null)
+            {
+                Debug.Log("spawnStar not found");
+
+            }
+            else
+            {
+                spawnStar.OnStartStarDeath();
+            }
+
+            //if(TryGetComponent<SpawnStar>(out spawnStar))
+            //{
+            //    Debug.Log("Starting Star Death");
+            //    spawnStar.OnStartStarDeath();
+            //}
+
         }
 
     }

@@ -19,7 +19,7 @@ public class LeafBlowerEx : GrabbableObject
     {
         if (m_highlightedObject != null)
         {
-            Debug.Log($"{m_highlightedObject.name} has been un-highlighted.");
+            //Debug.Log($"{m_highlightedObject.name} has been un-highlighted.");
             m_highlightedObject.OnHoverEnd();
             m_highlightedObject = null;
         }
@@ -33,7 +33,7 @@ public class LeafBlowerEx : GrabbableObject
         if (hit.transform.gameObject.TryGetComponent<PullableObject>(out m_highlightedObject))
         {
             m_highlightedObject.OnHoverStart();
-            Debug.Log($"{m_highlightedObject.name} has been highlighted.");
+            //Debug.Log($"{m_highlightedObject.name} has been highlighted.");
             
         }
       

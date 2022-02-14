@@ -66,7 +66,7 @@ public class GrabbableObject : MonoBehaviour
             Destroy(GetComponent<FixedJoint>());
             Vector3 direction = m_trackedPositions[m_trackedPositions.Count - 1] - m_trackedPositions[0];
             GetComponent<Rigidbody>().AddForce(direction * m_throwForce);
-            Debug.Log(direction * m_throwForce);
+            //Debug.Log(direction * m_throwForce);
             m_isHeld = false;
             m_isThrown = true;
         }
