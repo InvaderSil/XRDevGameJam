@@ -353,7 +353,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_outlineMaterial: {fileID: 2100000, guid: 859ef2b9d28cd9b4db40864f1cc46b10, type: 2}
-  m_outlineScaleFactor: -7.05
+  m_outlineScaleFactor: -5.32
   m_outlineColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &605933249
 MonoBehaviour:

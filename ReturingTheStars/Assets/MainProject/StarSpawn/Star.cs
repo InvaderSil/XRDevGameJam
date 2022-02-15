@@ -40,7 +40,7 @@ public class Star : PullableObject
     public void Capture()
     {
         CurrentState = StarState.Caught;
-        Debug.Log(name + " has been captured by remote");
+        //Debug.Log(name + " has been captured by remote");
     }
 
     public void StartTimer()

@@ -32,6 +32,16 @@ public class StarCapture : MonoBehaviour
             m_isCaputing = false;
             m_isComplete = true;
             m_capturedStar.Capture();
+            var innerCore = transform.Find("InnerCore");
+            if (innerCore != null)
+            {
+                innerCore.GetComponent<MeshRenderer>().enabled = false;
+            }
+            else
+            {
+                Debug.Log("InnerCore could not be found.");
+            }
+
         }
     }
 

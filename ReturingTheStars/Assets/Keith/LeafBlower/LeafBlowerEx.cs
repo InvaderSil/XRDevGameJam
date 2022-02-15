@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LeafBlowerEx : GrabbableObject
@@ -28,7 +26,7 @@ public class LeafBlowerEx : GrabbableObject
     {
         if (m_highlightedObject != null)
         {
-            //Debug.Log($"{m_highlightedObject.name} has been un-highlighted.");
+            
             m_highlightedObject.OnHoverEnd();
             m_highlightedObject = null;
         }
@@ -42,7 +40,7 @@ public class LeafBlowerEx : GrabbableObject
         if (hit.transform.gameObject.TryGetComponent<PullableObject>(out m_highlightedObject))
         {
             m_highlightedObject.OnHoverStart();
-            //Debug.Log($"{m_highlightedObject.name} has been highlighted.");
+            
             
         }
       
@@ -68,7 +66,7 @@ public class LeafBlowerEx : GrabbableObject
             if (hit.transform.gameObject.TryGetComponent<PullableObject>(out m_pullableObject))
             {
                 m_pullableObject.OnTriggerStart(m_nozzlePoint);
-                Debug.Log($"{m_pullableObject.name} OnTriggerDown in LeafBlowerEx");
+                
             }
 
         }
@@ -80,7 +78,7 @@ public class LeafBlowerEx : GrabbableObject
 
         if (m_pullableObject != null)
         {
-            Debug.Log($"{m_pullableObject.name} OnTriggerUp in LeafBlowerEx");
+            
             m_pullableObject.OnTriggerEnd();
 
 

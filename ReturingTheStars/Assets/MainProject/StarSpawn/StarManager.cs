@@ -10,7 +10,7 @@ public class StarManager : MonoBehaviour
     void Start()
     {
         InitStarGroup();
-        Debug.Log("Start: Size of stars = " + Stars.Count);
+        
     }
 
     // Update is called once per frame
@@ -20,16 +20,13 @@ public class StarManager : MonoBehaviour
         {
             var localStar = item.StarObject;
 
-            Debug.Log("Update: Size of stars = " + Stars.Count);
-            //Debug.Log("item.StarObject.name = " + item.StarObject.gameObject.name);
-
             if (localStar == null)
             {
                 Debug.Log("localStar is null");
                 continue;
             }
 
-            Debug.Log(item.StarObject.name  + " is " + localStar.GetCurrentState());
+            
         }
 
         ProcessTimeOutStars();

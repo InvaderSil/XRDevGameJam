@@ -26,8 +26,7 @@ public class ScalingToHeight : MonoBehaviour
     {
         currentHeight = transform.localPosition.y;
 
-        Debug.Log(name + "currentHeight = " + currentHeight);
-
+        
         //var scale = 2f * Time.deltaTime;
 
         if (currentHeight >= maxHeight)
