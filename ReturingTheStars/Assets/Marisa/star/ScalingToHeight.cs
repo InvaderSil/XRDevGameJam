@@ -5,8 +5,9 @@ using UnityEngine;
 public class ScalingToHeight : MonoBehaviour
 {
     [SerializeField] private float m_scale = 2f;
+    //[SerializeField] private float m_scale = 2f;
 
-    private float maxHeight = 30;
+    private float maxHeight = 10;
     //private float initialHeight;
     private float currentHeight;
     private Vector3 scale;
@@ -32,11 +33,8 @@ public class ScalingToHeight : MonoBehaviour
 
         if (currentHeight >= maxHeight)
         {
-<<<<<<< Updated upstream
-            transform.localScale = new Vector3(1, 1, 1) * scale;
-=======
+            //transform.localScale = new Vector3(1, 1, 1) * scale;
             transform.localScale = new Vector3(1, 1, 1) * 2;
->>>>>>> Stashed changes
         }
         else
         {
