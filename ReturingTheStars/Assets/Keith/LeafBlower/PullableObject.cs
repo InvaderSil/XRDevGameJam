@@ -6,52 +6,41 @@ using DG.Tweening;
 [RequireComponent(typeof(Rigidbody))]
 public class PullableObject : MonoBehaviour
 {
-    [SerializeField] private Color m_highlightedColor = Color.green;
+
     [SerializeField] private float m_shootForce = 200f;
-    //[SerializeField] private Material m_outlineMaterial;
-    //[SerializeField] private float m_outlineScaleFactor;
-    //[SerializeField] private Color m_outlineColor;
-    //private Renderer m_outlineRenderer;
-
-
-    private Color m_originalColor;
-    private Renderer m_rend;
+   
     private Transform m_blowerPos;
     private DG.Tweening.Core.TweenerCore<Vector3, Vector3, DG.Tweening.Plugins.Options.VectorOptions> m_dotweener;
 
+    protected StarState CurrentState;
+
     private void Start()
     {
-        m_rend = GetComponent<Renderer>();
+        CurrentState = StarState.none;
     }
 
     public virtual void OnHoverStart()
     {
-        //m_rend.material.color = m_highlightedColor;
-        //m_outlineRenderer.enabled = true;
         GetComponent<OutlineScript>().ToggleOutline();
     }
 
     public virtual void OnHoverEnd()
     {
-        //m_rend.material.color = m_originalColor;
-        //m_outlineRenderer.enabled = false;
         GetComponent<OutlineScript>().ToggleOutline();
     }
 
     public void OnTriggerStart(GameObject nozzlePoint)
     {
-        //transform.parent = hand.transform;
         GetComponent<Rigidbody>().isKinematic = true;
 
         m_blowerPos = nozzlePoint.transform;
 
-        //Debug.Log("m_blowerPos = " + m_blowerPos);
+        
 
         var boxCollider = GetComponent<BoxCollider>();
         var renderer = GetComponent<Renderer>();
         var estimatedRadius = renderer.bounds.size / 2;
-        //var estimatedRadius = boxCollider.size/2;
-
+        
         m_dotweener = transform.DOMove(m_blowerPos.position + estimatedRadius, 3f);
         
         FixedJoint fx = gameObject.AddComponent<FixedJoint>();
@@ -69,8 +58,7 @@ public class PullableObject : MonoBehaviour
         }
         // Make sure you create the FixedJoint first before making the parent
         transform.parent = nozzlePoint.transform;
-        //m_trackedPositions.Clear();
-        //m_isHeld = true;
+        
     }
 
     
@@ -97,25 +85,7 @@ public class PullableObject : MonoBehaviour
             localRB.useGravity = false;
             GetComponent<Rigidbody>().AddForce(m_blowerPos.forward * m_shootForce);
 
-            
-
-
-            var spawnStar = GetComponent<SpawnStar>();
-            if(spawnStar == null)
-            {
-                Debug.Log("spawnStar not found");
-
-            }
-            else
-            {
-                spawnStar.OnStartStarDeath();
-            }
-
-            //if(TryGetComponent<SpawnStar>(out spawnStar))
-            //{
-            //    Debug.Log("Starting Star Death");
-            //    spawnStar.OnStartStarDeath();
-            //}
+            CurrentState = StarState.Flying;         
 
         }
 

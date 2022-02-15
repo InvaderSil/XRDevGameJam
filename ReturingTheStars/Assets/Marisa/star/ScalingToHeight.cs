@@ -26,13 +26,17 @@ public class ScalingToHeight : MonoBehaviour
     {
         currentHeight = transform.localPosition.y;
 
+        Debug.Log(name + "currentHeight = " + currentHeight);
+
+        var scale = m_scale * Time.deltaTime;
+
         if (currentHeight >= maxHeight)
         {
-            transform.localScale = new Vector3(1, 1, 1) * m_scale;
+            transform.localScale = new Vector3(1, 1, 1) * scale;
         }
         else
         {
-            transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            transform.localScale = new Vector3(1, 1, 1);
         }
     }
 }

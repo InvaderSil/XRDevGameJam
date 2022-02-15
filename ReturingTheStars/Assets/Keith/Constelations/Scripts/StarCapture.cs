@@ -11,7 +11,7 @@ public class StarCapture : MonoBehaviour
     private bool m_isCaputing = false;
     private bool m_isComplete = false;
 
-    
+    private Star m_capturedStar;
 
     // Update is called once per frame
     void Update()
@@ -31,7 +31,7 @@ public class StarCapture : MonoBehaviour
             // Assumed that the animation is done
             m_isCaputing = false;
             m_isComplete = true;
-
+            m_capturedStar.Capture();
         }
     }
 
@@ -42,6 +42,8 @@ public class StarCapture : MonoBehaviour
         {
             return;
         }
+
+        m_capturedStar = other.GetComponent<Star>();
 
         // pull the other to the center
         m_dotweener = other.transform.DOMove(transform.position, m_pullSpeed);

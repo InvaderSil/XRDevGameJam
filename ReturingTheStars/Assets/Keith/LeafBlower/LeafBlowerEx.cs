@@ -49,7 +49,7 @@ public class LeafBlowerEx : GrabbableObject
             if (hit.transform.gameObject.TryGetComponent<PullableObject>(out m_pullableObject))
             {
                 m_pullableObject.OnTriggerStart(m_nozzlePoint);
-                Debug.Log($"{m_pullableObject.name} has been captured");
+                Debug.Log($"{m_pullableObject.name} OnTriggerDown in LeafBlowerEx");
             }
 
         }
@@ -61,7 +61,7 @@ public class LeafBlowerEx : GrabbableObject
 
         if (m_pullableObject != null)
         {
-            Debug.Log($"{m_pullableObject.name} has been released");
+            Debug.Log($"{m_pullableObject.name} OnTriggerUp in LeafBlowerEx");
             m_pullableObject.OnTriggerEnd();
         }
     }
