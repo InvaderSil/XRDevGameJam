@@ -9,7 +9,7 @@ public class StarCapture : MonoBehaviour
 
     private DG.Tweening.Core.TweenerCore<Vector3, Vector3, DG.Tweening.Plugins.Options.VectorOptions> m_dotweener;
     private bool m_isCaputing = false;
-    private bool m_isComplete = false;
+    public bool IsComplete = false;
 
     private Star m_capturedStar;
 
@@ -30,7 +30,7 @@ public class StarCapture : MonoBehaviour
         {
             // Assumed that the animation is done
             m_isCaputing = false;
-            m_isComplete = true;
+            IsComplete = true;
             m_capturedStar.Capture();
         }
     }
@@ -38,7 +38,7 @@ public class StarCapture : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // We only want one object here
-        if(m_isComplete)
+        if(IsComplete)
         {
             return;
         }
