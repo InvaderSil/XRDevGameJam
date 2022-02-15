@@ -19,6 +19,7 @@ public class Star : PullableObject
     {
         if (CurrentState != StarState.Caught)
         {
+            //Destroy(gameObject.transform.parent);
             Destroy(gameObject);
         }
     }

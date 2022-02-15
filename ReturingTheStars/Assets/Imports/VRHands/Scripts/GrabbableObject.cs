@@ -16,7 +16,7 @@ public class GrabbableObject : MonoBehaviour
 
     private int m_maxTrackedPositions = 15;
 
-     private void Start()
+     public virtual void Start()
     {
         m_rend = GetComponent<Renderer>();
         m_originalColor = m_rend.material.color;

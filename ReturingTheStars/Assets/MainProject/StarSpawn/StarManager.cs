@@ -39,7 +39,15 @@ public class StarManager : MonoBehaviour
             if(item.StarObject.IsTimerCompleted())
             {
                 item.StarObject.DestorySelf();
-                item.SpawnStar(); // TODO If can't get all 7 then add a delay on this
+
+                if (item.StarObject.GetCurrentState() != StarState.Caught)
+                {
+                    item.SpawnStar(); // TODO If can't get all 7 then add a delay on this
+                    
+                }
+
+                
+
             }
         }
     }
