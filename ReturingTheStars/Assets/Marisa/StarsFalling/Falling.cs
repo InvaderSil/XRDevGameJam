@@ -20,13 +20,13 @@ public class Falling : MonoBehaviour
     //unhides the object gameobject
     public void DisplayObject()
     {
-        _object.SetActive(true);
+        //_object.SetActive(true);
     }
 
     //should move the object down the screen
     void Update()
     {
-        if (CanFall == true)
+        if (CanFall)
         {
             transform.Translate(Vector3.down * fallSpeed * Time.deltaTime, Space.World);
         }

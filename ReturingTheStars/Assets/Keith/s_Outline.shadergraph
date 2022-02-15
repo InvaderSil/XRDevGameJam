@@ -41,6 +41,9 @@
         },
         {
             "m_Id": "13cc074eb3e34edb8e80e31de05d27b5"
+        },
+        {
+            "m_Id": "77a0c9e1ad3e45ed966a402832e87d06"
         }
     ],
     "m_GroupDatas": [],
@@ -156,6 +159,9 @@
         "m_Blocks": [
             {
                 "m_Id": "53df02e5e17c4af3be9cd914f427887e"
+            },
+            {
+                "m_Id": "77a0c9e1ad3e45ed966a402832e87d06"
             }
         ]
     },
@@ -537,6 +543,21 @@
 {
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "75415e0ca2c14153a89e84859a58b23c",
+    "m_Id": 0,
+    "m_DisplayName": "Alpha",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Alpha",
+    "m_StageCapability": 2,
+    "m_Value": 0.5199999809265137,
+    "m_DefaultValue": 1.0,
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "76c704dee0334f55a694807e322489d7",
     "m_Id": 0,
     "m_DisplayName": "Scale",
@@ -547,6 +568,39 @@
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
     "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.BlockNode",
+    "m_ObjectId": "77a0c9e1ad3e45ed966a402832e87d06",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "SurfaceDescription.Alpha",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 0.0,
+            "height": 0.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "75415e0ca2c14153a89e84859a58b23c"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_SerializedDescriptor": "SurfaceDescription.Alpha"
 }
 
 {
@@ -1072,7 +1126,7 @@
     "m_ActiveSubTarget": {
         "m_Id": "2f18a1c9015f41c0b742dfbcd6a092df"
     },
-    "m_SurfaceType": 0,
+    "m_SurfaceType": 1,
     "m_AlphaMode": 0,
     "m_TwoSided": false,
     "m_AlphaClip": false,
