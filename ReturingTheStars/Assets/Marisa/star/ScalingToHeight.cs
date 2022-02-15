@@ -32,11 +32,7 @@ public class ScalingToHeight : MonoBehaviour
 
         if (currentHeight >= maxHeight)
         {
-<<<<<<< Updated upstream
             transform.localScale = new Vector3(1, 1, 1) * scale;
-=======
-            transform.localScale = new Vector3(1, 1, 1) * 2;
->>>>>>> Stashed changes
         }
         else
         {

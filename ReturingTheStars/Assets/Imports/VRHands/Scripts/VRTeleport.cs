@@ -24,6 +24,7 @@ public class VRTeleport : MonoBehaviour
     {
         m_teleportButton = $"XRI_{m_hand}_PrimaryButton";
         m_line.positionCount = m_lineResolution;
+        
     }
 
     // Update is called once per frame

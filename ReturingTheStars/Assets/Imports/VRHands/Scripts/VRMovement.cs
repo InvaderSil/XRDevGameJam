@@ -12,15 +12,11 @@ public class VRMovement : MonoBehaviour
     private string m_horizontal;
     private string m_vertical;
 
-    private AudioSource m_audioSource;
-
     // Start is called before the first frame update
     void Start()
     {
         m_horizontal = $"XRI_{m_hand}_Primary2DAxis_Horizontal"; 
         m_vertical = $"XRI_{m_hand}_Primary2DAxis_Vertical";
-
-        m_audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -39,25 +35,6 @@ public class VRMovement : MonoBehaviour
 
         m_XrRig.position += playerForward * yAxis * Time.deltaTime * m_speed;
         m_XrRig.position += playerRight * xAxis * Time.deltaTime * m_speed;
-
-        if (yAxis > .1f || yAxis < -.1f || xAxis > .1f || xAxis < -.1f)
-        {
-            if (m_audioSource == null)
-            {
-                Debug.LogError("The AudioSource in the player NULL!");
-            }
-            else
-            {
-                if (!m_audioSource.isPlaying)
-                {
-                    m_audioSource.Play();
-                }
-            }
-        }
-        else
-        {
-            m_audioSource.Pause();
-        }
 
     }
 }
