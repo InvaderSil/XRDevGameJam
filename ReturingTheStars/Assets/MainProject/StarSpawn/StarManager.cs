@@ -42,11 +42,9 @@ public class StarManager : MonoBehaviour
 
                 if (item.StarObject.GetCurrentState() != StarState.Caught)
                 {
-                    item.SpawnStar(); // TODO If can't get all 7 then add a delay on this
+                    item.SpawnStar(); 
                     
                 }
-
-                
 
             }
         }

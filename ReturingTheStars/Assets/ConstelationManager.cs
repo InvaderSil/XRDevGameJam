@@ -26,7 +26,7 @@ public class ConstelationManager : MonoBehaviour
     private void HandleParticles()
     {
         m_fireworksParticls.Play();
-        Debug.Log("Fire particle system here.");
+        m_fireworksParticls.GetComponent<AudioSource>().Play();
     }
 
     private bool IsConstelationComplete()

@@ -12593,6 +12593,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7000078990768439586, guid: f888ea3344fcc3c45932610d21985ae9, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7221247328669129537, guid: f888ea3344fcc3c45932610d21985ae9, type: 3}
       propertyPath: m_Name
       value: BigDipper
@@ -31675,6 +31679,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 748464095, guid: 945042f8b60aebe45920627381f88f44, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3698678432755815860, guid: 945042f8b60aebe45920627381f88f44, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.005
