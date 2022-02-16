@@ -3138,6 +3138,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_sceneName: StarsFalling
   m_timeToLoad: 1
+  m_timer: {fileID: 0}
+  m_crossfade: {fileID: 0}
 --- !u!135 &88972231
 SphereCollider:
   m_ObjectHideFlags: 0

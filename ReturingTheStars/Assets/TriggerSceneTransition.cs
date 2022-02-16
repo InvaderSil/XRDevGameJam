@@ -10,6 +10,7 @@ public class TriggerSceneTransition : MonoBehaviour
     [SerializeField] private float m_timeToLoad;
     [SerializeField] private Timer m_timer;
 
+
     private void Start()
     {
         if(m_timer != null)
@@ -44,8 +45,9 @@ public class TriggerSceneTransition : MonoBehaviour
 
     private IEnumerator LoadAfterTimer(string sceneName)
     {
-        yield return new WaitForSeconds(m_timeToLoad);
+        
+        yield return new WaitForSeconds(2.0f);
 
-        SceneManager.LoadSceneAsync(sceneName);
+        SceneManager.LoadScene(sceneName);
     }
 }
