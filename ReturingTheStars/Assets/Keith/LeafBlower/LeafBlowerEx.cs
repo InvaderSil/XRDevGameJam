@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LeafBlowerEx : GrabbableObject
@@ -13,8 +11,9 @@ public class LeafBlowerEx : GrabbableObject
     [SerializeField] private AudioClip triggerReleaseSound;
     private AudioSource m_audioSource;
 
-    void Start()
+    public override void Start()
     {
+        base.Start();
         m_audioSource = GetComponent<AudioSource>();
     }
 
@@ -28,7 +27,7 @@ public class LeafBlowerEx : GrabbableObject
     {
         if (m_highlightedObject != null)
         {
-            //Debug.Log($"{m_highlightedObject.name} has been un-highlighted.");
+            
             m_highlightedObject.OnHoverEnd();
             m_highlightedObject = null;
         }
@@ -42,7 +41,7 @@ public class LeafBlowerEx : GrabbableObject
         if (hit.transform.gameObject.TryGetComponent<PullableObject>(out m_highlightedObject))
         {
             m_highlightedObject.OnHoverStart();
-            //Debug.Log($"{m_highlightedObject.name} has been highlighted.");
+            
             
         }
       
@@ -52,6 +51,26 @@ public class LeafBlowerEx : GrabbableObject
     {
         base.OnTriggerDown();
 
+        ProcessAudioPlay();
+        ProcessHit();
+    }
+
+    private void ProcessHit()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(m_nozzlePoint.transform.position, m_nozzlePoint.transform.forward, out hit, Mathf.Infinity))
+        {
+            if (hit.transform.gameObject.TryGetComponent<PullableObject>(out m_pullableObject))
+            {
+                m_pullableObject.OnTriggerStart(m_nozzlePoint);
+
+            }
+
+        }
+    }
+
+    private void ProcessAudioPlay()
+    {
         if (m_audioSource == null)
         {
             Debug.LogError("The AudioSource in the player NULL!");
@@ -61,17 +80,6 @@ public class LeafBlowerEx : GrabbableObject
             m_audioSource.clip = leafblowerSound;
             m_audioSource.Play();
         }
-
-        RaycastHit hit;
-        if (Physics.Raycast(m_nozzlePoint.transform.position, m_nozzlePoint.transform.forward, out hit, Mathf.Infinity))
-        {
-            if (hit.transform.gameObject.TryGetComponent<PullableObject>(out m_pullableObject))
-            {
-                m_pullableObject.OnTriggerStart(m_nozzlePoint);
-                Debug.Log($"{m_pullableObject.name} OnTriggerDown in LeafBlowerEx");
-            }
-
-        }
     }
 
     public override void OnTriggerUp()
@@ -80,20 +88,22 @@ public class LeafBlowerEx : GrabbableObject
 
         if (m_pullableObject != null)
         {
-            Debug.Log($"{m_pullableObject.name} OnTriggerUp in LeafBlowerEx");
+
             m_pullableObject.OnTriggerEnd();
-
-
-            if (m_audioSource == null)
-            {
-                Debug.LogError("The AudioSource in the player NULL!");
-            }
-            else
-            {
-                m_audioSource.clip = triggerReleaseSound;
-                m_audioSource.Play();
-            }
+            ProcessAudioStop();
         }
     }
 
+    private void ProcessAudioStop()
+    {
+        if (m_audioSource == null)
+        {
+            Debug.LogError("The AudioSource in the player NULL!");
+        }
+        else
+        {
+            m_audioSource.clip = triggerReleaseSound;
+            m_audioSource.Play();
+        }
+    }
 }
