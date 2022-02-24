@@ -72,6 +72,7 @@ GameObject:
   - component: {fileID: 748464094}
   - component: {fileID: 748464096}
   - component: {fileID: 748464095}
+  - component: {fileID: 811341273266133950}
   m_Layer: 0
   m_Name: TeleportFaderQuad
   m_TagString: Untagged
@@ -142,6 +143,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &811341273266133950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 748464093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dc27468f728c084691c5fda47abfe49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeOnStart: 1
+  fadeDuration: 2
+  fadeColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1880592903
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,48 +6,17 @@ using UnityEngine.SceneManagement;
 
 public class TriggerSceneTransition : MonoBehaviour
 {
-    [SerializeField] private string m_sceneName;
-    [SerializeField] private float m_timeToLoad;
-    [SerializeField] private Timer m_timer;
-
-
-    private void Start()
-    {
-        if(m_timer != null)
-        {
-            m_timer.StartTimer();
-        }
-    }
-
-    private void Update()
-    {
-        if(m_timer != null)
-        {
-            if(m_timer.IsComplete)
-            {
-                LoadScene(m_sceneName);
-            }
-        }
-    }
+    [SerializeField] private SceneTransitionManager m_sceneManager;
+    
+    private bool m_isLoading = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && !m_isLoading)
         {
-            LoadScene(m_sceneName);
+            m_isLoading = true;
+            m_sceneManager.LoadScene();
         }
     }
 
-    public void LoadScene(string sceneName)
-    {
-        StartCoroutine(LoadAfterTimer(sceneName));
-    }
-
-    private IEnumerator LoadAfterTimer(string sceneName)
-    {
-        
-        yield return new WaitForSeconds(2.0f);
-
-        SceneManager.LoadScene(sceneName);
-    }
 }

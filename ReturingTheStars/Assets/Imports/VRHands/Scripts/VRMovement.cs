@@ -56,7 +56,10 @@ public class VRMovement : MonoBehaviour
         }
         else
         {
-            m_audioSource.Pause();
+            if (m_audioSource != null)
+            {
+                m_audioSource.Pause();
+            }
         }
     }
 }
