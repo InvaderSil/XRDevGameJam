@@ -53,9 +53,19 @@ public class SceneTransitionManager : MonoBehaviour
     {
         m_fadeScreen.FadeOut();
 
-        yield return new WaitForSeconds(m_fadeScreen.fadeDuration);
+        AsyncOperation asyncOp = SceneManager.LoadSceneAsync(sceneName);
+        asyncOp.allowSceneActivation = false;
 
-        SceneManager.LoadSceneAsync(sceneName);
+        float timer = 0;
+
+        while(timer <= m_fadeScreen.fadeDuration && !asyncOp.isDone)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        asyncOp.allowSceneActivation = true;
+        
         
     }
 }
