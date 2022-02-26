@@ -15,7 +15,7 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
   m_Fog: 0
-  m_FogColor: {r: 0.92431784, g: 0.92366797, b: 0.9418239, a: 1}
+  m_FogColor: {r: 0.0918141, g: 0.08401567, b: 0.3018868, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.01
   m_LinearFogStart: 0
@@ -7536,10 +7536,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DirectionalLight: {fileID: 864706138}
   Preset: {fileID: 11400000, guid: f331b448936bb2842871195dcd047342, type: 2}
-  TimeOfDay: 22
+  TimeOfDay: 0
   startHour: 22
   timeMultiplier: 0.05
-  sunriseTime: 8.5
   lightChangeCurve:
     serializedVersion: 2
     m_Curve:
@@ -7576,8 +7575,9 @@ MonoBehaviour:
   maxSunLightIntensity: 1
   maxMoonLightIntensity: 0.5
   moonLight: {fileID: 1976987584}
-  dayAmbientLight: {r: 0.9528302, g: 0.9025131, b: 0.6427109, a: 0}
+  dayAmbientLight: {r: 0.9716981, g: 0.9317232, b: 0.7287736, a: 0}
   nightAmbientLight: {r: 0.06768423, g: 0.14596568, b: 0.3679245, a: 0}
+  sunriseTime: 8.5
 --- !u!4 &248503566
 Transform:
   m_ObjectHideFlags: 0
@@ -23423,7 +23423,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.9213837, g: 0.91686696, b: 0.91686696, a: 1}
+  m_Color: {r: 0.05660379, g: 0.0024029901, b: 0.0024029901, a: 1}
   m_Intensity: 0
   m_Range: 10
   m_SpotAngle: 30
@@ -23436,7 +23436,7 @@ Light:
     m_Strength: 1
     m_Bias: 0.05
     m_NormalBias: 0.4
-    m_NearPlane: 0.2
+    m_NearPlane: 2.1
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -23481,7 +23481,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 864706137}
-  m_LocalRotation: {x: 0.07547914, y: -0.49809742, z: -0.8627299, w: -0.043577906}
+  m_LocalRotation: {x: -0.061628457, y: 0.70441604, z: 0.70441604, w: 0.061628457}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []

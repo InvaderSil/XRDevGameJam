@@ -15,16 +15,14 @@ public class LightingManager : MonoBehaviour
     [SerializeField] private float startHour;
     [SerializeField] private float timeMultiplier; //time speed
 
-    [SerializeField] private float sunriseTime = 8.5f;
-
     [SerializeField] private AnimationCurve lightChangeCurve;
-
     [SerializeField] private float maxSunLightIntensity;
     [SerializeField] private float maxMoonLightIntensity;
     [SerializeField] private Light moonLight;
     [SerializeField] private Color dayAmbientLight;
     [SerializeField] private Color nightAmbientLight;
 
+    [SerializeField] private float sunriseTime = 8.5f;
 
     private void Start()
     {
