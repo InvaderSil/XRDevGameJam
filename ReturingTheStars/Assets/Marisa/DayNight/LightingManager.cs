@@ -15,8 +15,21 @@ public class LightingManager : MonoBehaviour
     [SerializeField] private float startHour;
     [SerializeField] private float timeMultiplier; //time speed
 
+    [SerializeField] private float sunriseTime = 8.5f;
+
+    [SerializeField] private AnimationCurve lightChangeCurve;
+
+    [SerializeField] private float maxSunLightIntensity;
+    [SerializeField] private float maxMoonLightIntensity;
+    [SerializeField] private Light moonLight;
+    [SerializeField] private Color dayAmbientLight;
+    [SerializeField] private Color nightAmbientLight;
+
+
     private void Start()
     {
+        TimeOfDay = startHour;
+        sunriseTime = 8.5f;
     }
 
     private void Update()
@@ -39,13 +52,18 @@ public class LightingManager : MonoBehaviour
 
     private void UpdateLighting(float timePercent)
     {
-        RenderSettings.ambientLight = Preset.AmbientColor.Evaluate(timePercent);
         RenderSettings.fogColor = Preset.FogColor.Evaluate(timePercent);
 
-        if(DirectionalLight != null)
+        if (DirectionalLight != null)
         {
             DirectionalLight.color = Preset.DirectionalLight.Evaluate(timePercent);
             DirectionalLight.transform.localRotation = Quaternion.Euler(new Vector3((timePercent * 360f) - 90f, 170f, 0));
+
+            //if the directionlight is pointing down the dotProduct = 1, horizontally = 0, and up = -1
+            float dotProduct = Vector3.Dot(DirectionalLight.transform.forward, Vector3.down);
+            DirectionalLight.intensity = Mathf.Lerp(0, maxSunLightIntensity, lightChangeCurve.Evaluate(dotProduct));
+            moonLight.intensity = Mathf.Lerp(maxMoonLightIntensity, 0, lightChangeCurve.Evaluate(dotProduct));
+            RenderSettings.ambientLight = Color.Lerp(nightAmbientLight, dayAmbientLight, lightChangeCurve.Evaluate(dotProduct));
         }
     }
 
