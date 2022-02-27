@@ -61,6 +61,7 @@ public class LightingManager : MonoBehaviour
         {
             DirectionalLight.color = Preset.DirectionalLight.Evaluate(timePercent);
             DirectionalLight.transform.localRotation = Quaternion.Euler(new Vector3((timePercent * 360f) - 90f, 170f, 0));
+            moonLight.transform.localRotation = Quaternion.Euler(new Vector3((timePercent * 360f) - 90f, 170f, 0));
 
             //if the directionlight is pointing down the dotProduct = 1, horizontally = 0, and up = -1
             float dotProduct = Vector3.Dot(DirectionalLight.transform.forward, Vector3.down);
