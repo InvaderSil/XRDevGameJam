@@ -15,7 +15,7 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
   m_Fog: 0
-  m_FogColor: {r: 0.0918141, g: 0.08401567, b: 0.3018868, a: 1}
+  m_FogColor: {r: 0.26209897, g: 0.25576273, b: 0.432783, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.01
   m_LinearFogStart: 0
@@ -7515,6 +7515,7 @@ GameObject:
   m_Component:
   - component: {fileID: 248503566}
   - component: {fileID: 248503565}
+  - component: {fileID: 248503567}
   m_Layer: 0
   m_Name: LightManager
   m_TagString: Untagged
@@ -7536,8 +7537,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DirectionalLight: {fileID: 864706138}
   Preset: {fileID: 11400000, guid: f331b448936bb2842871195dcd047342, type: 2}
-  TimeOfDay: 0
-  startHour: 22
+  TimeOfDay: 4.5
+  startHour: 4.5
   timeMultiplier: 0.05
   lightChangeCurve:
     serializedVersion: 2
@@ -7578,6 +7579,7 @@ MonoBehaviour:
   dayAmbientLight: {r: 0.9716981, g: 0.9317232, b: 0.7287736, a: 0}
   nightAmbientLight: {r: 0.06768423, g: 0.14596568, b: 0.3679245, a: 0}
   sunriseTime: 8.5
+  skyboxScript: {fileID: 248503567}
 --- !u!4 &248503566
 Transform:
   m_ObjectHideFlags: 0
@@ -7594,6 +7596,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &248503567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 248503564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70633c70e529b824d9168cd2abfc1a5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skyboxMaterials:
+  - {fileID: 2100000, guid: 7c10da0d74d78364bac94506d77290bf, type: 2}
+  makeFirstMaterialSkybox: 0
+  blendSpeed: 0.05
+  timeToWait: 0
+  loop: 0
+  rotateTo: 0
+  rotationSpeed: 0
 --- !u!1001 &250900727
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23423,7 +23445,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.05660379, g: 0.0024029901, b: 0.0024029901, a: 1}
+  m_Color: {r: 0.23349059, g: 0.18945244, b: 0.18945244, a: 1}
   m_Intensity: 0
   m_Range: 10
   m_SpotAngle: 30
@@ -23481,7 +23503,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 864706137}
-  m_LocalRotation: {x: -0.061628457, y: 0.70441604, z: 0.70441604, w: 0.061628457}
+  m_LocalRotation: {x: -0.017003253, y: 0.9770531, z: 0.19434795, w: 0.08548113}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []

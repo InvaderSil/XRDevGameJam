@@ -22,12 +22,13 @@ public class LightingManager : MonoBehaviour
     [SerializeField] private Color dayAmbientLight;
     [SerializeField] private Color nightAmbientLight;
 
-    [SerializeField] private float sunriseTime = 8.5f;
+    [SerializeField] private float sunriseTime;
+
+    public SkyboxBlender skyboxScript;
 
     private void Start()
     {
         TimeOfDay = startHour;
-        sunriseTime = 8.5f;
     }
 
     private void Update()
@@ -41,6 +42,10 @@ public class LightingManager : MonoBehaviour
             TimeOfDay += Time.deltaTime * timeMultiplier;
             TimeOfDay %= 24; //clamp between 0-24
             UpdateLighting( TimeOfDay / 24f );
+            if( TimeOfDay > sunriseTime)
+            {
+                skyboxScript.SkyboxBlend();
+            }
         }
         else
         {
