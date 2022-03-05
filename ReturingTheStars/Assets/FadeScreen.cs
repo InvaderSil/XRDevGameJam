@@ -45,6 +45,7 @@ public class FadeScreen : MonoBehaviour
             rend.material.color = newColor;
 
             timer += Time.deltaTime;
+            
             yield return null;
         }
 

@@ -1522,7 +1522,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &43308650
 PrefabInstance:
@@ -12485,6 +12485,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5763158296254691593, guid: f888ea3344fcc3c45932610d21985ae9, type: 3}
+      propertyPath: fadeOnStart
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7000078990768439586, guid: f888ea3344fcc3c45932610d21985ae9, type: 3}
       propertyPath: m_PlayOnAwake
       value: 0
@@ -24720,7 +24724,7 @@ PrefabInstance:
       objectReference: {fileID: 1183358866}
     - target: {fileID: 4028096521374632781, guid: 7f623120f7322ab448ab9524309ebbd9, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4028096521374632781, guid: 7f623120f7322ab448ab9524309ebbd9, type: 3}
       propertyPath: m_LocalPosition.x

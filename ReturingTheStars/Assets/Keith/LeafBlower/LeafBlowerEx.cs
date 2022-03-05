@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class LeafBlowerEx : GrabbableObject
@@ -11,6 +12,8 @@ public class LeafBlowerEx : GrabbableObject
     [SerializeField] private AudioClip triggerReleaseSound;
     private AudioSource m_audioSource;
 
+    private bool starTargetHighlighted = false;
+
     public override void Start()
     {
         base.Start();
@@ -21,6 +24,34 @@ public class LeafBlowerEx : GrabbableObject
     {
         base.Update();
         HighlightPullableObject();
+        // TODO Put in call to highlight target star
+        HighlightStarTarget();
+    }
+
+    private void HighlightStarTarget()
+    {
+        if (((Star)m_pullableObject)?.GetCurrentState() == StarState.Ready)
+        {
+
+            RaycastHit hit;
+            if (!Physics.Raycast(m_nozzlePoint.transform.position, m_nozzlePoint.transform.forward, out hit, Mathf.Infinity))
+            {
+                return;
+            }
+
+            StarTarget targetedStar;
+            if (hit.transform.gameObject.TryGetComponent<StarTarget>(out targetedStar) && !starTargetHighlighted)
+            {
+                starTargetHighlighted = true;
+                targetedStar.TriggerHighlight();
+
+
+            }
+            else
+            {
+                starTargetHighlighted = false;
+            }
+        }
     }
 
     private void HighlightPullableObject()
