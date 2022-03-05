@@ -26,9 +26,16 @@ public class LightingManager : MonoBehaviour
 
     public SkyboxBlender skyboxScript;
 
+    [SerializeField] private AudioClip roosterSound;
+    private AudioSource m_audioSource;
+    private bool roosterCrowed;
+
+
     private void Start()
     {
         TimeOfDay = startHour;
+        m_audioSource = GetComponent<AudioSource>();
+        roosterCrowed = false;
     }
 
     private void Update()
@@ -42,9 +49,16 @@ public class LightingManager : MonoBehaviour
             TimeOfDay += Time.deltaTime * timeMultiplier;
             TimeOfDay %= 24; //clamp between 0-24
             UpdateLighting( TimeOfDay / 24f );
-            if( TimeOfDay > sunriseTime)
+
+            if ( TimeOfDay >= sunriseTime )
             {
                 skyboxScript.SkyboxBlend();
+                if (!roosterCrowed)
+                {
+                    Debug.Log("PLAY THE DAMN SOUND");
+                    ProcessAudioPlay();
+                    roosterCrowed = true;
+                }
             }
         }
         else
@@ -89,6 +103,19 @@ public class LightingManager : MonoBehaviour
                     return;
                 }
             }
+        }
+    }
+
+    private void ProcessAudioPlay()
+    {
+        if (m_audioSource == null)
+        {
+            Debug.LogError("The AudioSource in the player NULL!");
+        }
+        else
+        {
+            m_audioSource.clip = roosterSound;
+            m_audioSource.Play();
         }
     }
 }

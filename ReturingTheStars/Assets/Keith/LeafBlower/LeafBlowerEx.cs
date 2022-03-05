@@ -57,8 +57,7 @@ public class LeafBlowerEx : GrabbableObject
     private void HighlightPullableObject()
     {
         if (m_highlightedObject != null)
-        {
-            
+        {       
             m_highlightedObject.OnHoverEnd();
             m_highlightedObject = null;
         }
@@ -72,8 +71,6 @@ public class LeafBlowerEx : GrabbableObject
         if (hit.transform.gameObject.TryGetComponent<PullableObject>(out m_highlightedObject))
         {
             m_highlightedObject.OnHoverStart();
-            
-            
         }
       
     }
@@ -94,7 +91,6 @@ public class LeafBlowerEx : GrabbableObject
             if (hit.transform.gameObject.TryGetComponent<PullableObject>(out m_pullableObject))
             {
                 m_pullableObject.OnTriggerStart(m_nozzlePoint);
-
             }
 
         }
@@ -119,7 +115,6 @@ public class LeafBlowerEx : GrabbableObject
 
         if (m_pullableObject != null)
         {
-
             m_pullableObject.OnTriggerEnd();
             ProcessAudioStop();
         }
