@@ -31,10 +31,13 @@ public class LightingManager : MonoBehaviour
     private AudioSource m_audioSource;
     private bool roosterCrowed;
 
-    public float fadeSpeed;
+    //public float fadeSpeed;
     public GameObject ObjectsToFade;
     private bool faded;
-    private DG.Tweening.Core.TweenerCore<Color, Color, DG.Tweening.Plugins.Options.ColorOptions> m_dotweener;
+    //private DG.Tweening.Core.TweenerCore<Color, Color, DG.Tweening.Plugins.Options.ColorOptions> m_dotweener;
+
+    public GameObject StarSpawners;
+    private GameObject[] stars;
 
     private void Start()
     {
@@ -61,6 +64,15 @@ public class LightingManager : MonoBehaviour
             if ( TimeOfDay >= sunriseTime )
             {
                 skyboxScript.SkyboxBlend();
+                Destroy(StarSpawners.gameObject);
+
+                stars = GameObject.FindGameObjectsWithTag("star");
+                foreach(GameObject star in stars)
+                {
+                    Destroy(star.gameObject);
+                }
+                Debug.LogError("Destroy Stars");
+
                 if (!faded)
                 {
                     FadeOutObject();
@@ -146,18 +158,23 @@ public class LightingManager : MonoBehaviour
             Material[] materials = mr.materials;
             foreach(Material m in materials)
             {
-                if (m.shader != null)
-                {
-                    Debug.Log("Shader!");
+                m.DOFade(0, 3f);
 
-                    // make it a transparent one?
-                    m.shader = transparent;
-                }
-                else
-                {
-                    Debug.Log("Regular Material Fade Out");
-                    m.DOFade(0, 3f);
-                }
+                //if (m.shader != null)
+                //{
+                //    // make it a transparent one?
+                //    //m.shader = transparent;
+
+                //    if (m.HasProperty("_Color"))
+                //    {
+                //        Debug.Log("Shader!");
+                //    }
+                //}
+                //else
+                //{
+                //    Debug.Log("Regular Material Fade Out");
+                //    m.DOFade(0, 3f);
+                //}
             }
         }
     }
