@@ -11,7 +11,7 @@ public class LightingManager : MonoBehaviour
     [SerializeField] private Light DirectionalLight;
     [SerializeField] private LightPreset Preset;
     //Variables
-    [SerializeField, Range(0, 24)] private float TimeOfDay;
+    [SerializeField, Range(0, 24)] public float TimeOfDay;
     [SerializeField] private float startHour;
     [SerializeField] private float timeMultiplier; //time speed
 
@@ -22,7 +22,7 @@ public class LightingManager : MonoBehaviour
     [SerializeField] private Color dayAmbientLight;
     [SerializeField] private Color nightAmbientLight;
 
-    [SerializeField] private float sunriseTime;
+    [SerializeField] public float sunriseTime;
 
     public SkyboxBlender skyboxScript;
 
@@ -30,12 +30,16 @@ public class LightingManager : MonoBehaviour
     private AudioSource m_audioSource;
     private bool roosterCrowed;
 
+    public float fadeSpeed;
+    public GameObject ObjectsToFade;
+    private bool faded;
 
     private void Start()
     {
         TimeOfDay = startHour;
         m_audioSource = GetComponent<AudioSource>();
         roosterCrowed = false;
+        faded = false;
     }
 
     private void Update()
@@ -53,6 +57,11 @@ public class LightingManager : MonoBehaviour
             if ( TimeOfDay >= sunriseTime )
             {
                 skyboxScript.SkyboxBlend();
+                if (!faded)
+                {
+                    StartCoroutine(FadeOutObject(fadeSpeed));
+                    faded = true;
+                }
                 if (!roosterCrowed)
                 {
                     Debug.Log("PLAY THE DAMN SOUND");
@@ -117,5 +126,22 @@ public class LightingManager : MonoBehaviour
             m_audioSource.clip = roosterSound;
             m_audioSource.Play();
         }
+    }
+
+    public IEnumerator FadeOutObject(float fadeSpeed)
+    {
+        Debug.Log("Fade Out");
+
+        Renderer rend = ObjectsToFade.transform.GetComponent<Renderer>();
+        Color matColor = rend.material.color;
+        float alphaValue = rend.material.color.a;
+
+        while (rend.material.color.a > 0f)
+        {
+            alphaValue -= Time.deltaTime / fadeSpeed;
+            rend.material.color = new Color(matColor.r, matColor.g, matColor.b, alphaValue);
+            yield return new WaitForSeconds(fadeSpeed);
+        }
+        rend.material.color = new Color(matColor.r, matColor.g, matColor.b, 0f);
     }
 }
