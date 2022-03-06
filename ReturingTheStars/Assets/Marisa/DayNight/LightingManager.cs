@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 //Update method only gets called when something in the scene changes
 [ExecuteAlways]
@@ -33,12 +34,15 @@ public class LightingManager : MonoBehaviour
     public float fadeSpeed;
     public GameObject ObjectsToFade;
     private bool faded;
+    private DG.Tweening.Core.TweenerCore<Color, Color, DG.Tweening.Plugins.Options.ColorOptions> m_dotweener;
 
     private void Start()
     {
         TimeOfDay = startHour;
+
         m_audioSource = GetComponent<AudioSource>();
         roosterCrowed = false;
+
         faded = false;
     }
 
@@ -59,7 +63,7 @@ public class LightingManager : MonoBehaviour
                 skyboxScript.SkyboxBlend();
                 if (!faded)
                 {
-                    StartCoroutine(FadeOutObject(fadeSpeed));
+                    FadeOutObject();
                     faded = true;
                 }
                 if (!roosterCrowed)
@@ -128,20 +132,33 @@ public class LightingManager : MonoBehaviour
         }
     }
 
-    public IEnumerator FadeOutObject(float fadeSpeed)
+    //public IEnumerator FadeOutObject(float fadeSpeed)
+    public void FadeOutObject()
     {
-        Debug.Log("Fade Out");
+        Shader transparent = Shader.Find("Transparent/Diffuse");
 
-        Renderer rend = ObjectsToFade.transform.GetComponent<Renderer>();
-        Color matColor = rend.material.color;
-        float alphaValue = rend.material.color.a;
+        //Renderer rend = ObjectsToFade.transform.GetComponent<Renderer>();
+        //m_dotweener = rend.material.DOFade(0, 3f);
 
-        while (rend.material.color.a > 0f)
+        MeshRenderer[] meshRenderers = ObjectsToFade.GetComponentsInChildren<MeshRenderer>();
+        foreach(MeshRenderer mr in meshRenderers)
         {
-            alphaValue -= Time.deltaTime / fadeSpeed;
-            rend.material.color = new Color(matColor.r, matColor.g, matColor.b, alphaValue);
-            yield return new WaitForSeconds(fadeSpeed);
+            Material[] materials = mr.materials;
+            foreach(Material m in materials)
+            {
+                if (m.shader != null)
+                {
+                    Debug.Log("Shader!");
+
+                    // make it a transparent one?
+                    m.shader = transparent;
+                }
+                else
+                {
+                    Debug.Log("Regular Material Fade Out");
+                    m.DOFade(0, 3f);
+                }
+            }
         }
-        rend.material.color = new Color(matColor.r, matColor.g, matColor.b, 0f);
     }
 }
