@@ -50,6 +50,7 @@ public class SkyboxBlender : MonoBehaviour
             defaultBlend = skyboxBlenderMaterial.GetFloat("_BlendCubemaps");
             defaultRotation = skyboxBlenderMaterial.GetFloat("_Rotation");
             defaultSkyboxMaterial = skyboxBlenderMaterial;
+            skyboxBlenderMaterial.SetFloat("_BlendCubemaps", blendValue);
             inspectorAndAwakeChanges();
         }else{
             Debug.LogWarning("Can't find Skybox Blend Material in resources. Please re-import!");
@@ -69,10 +70,10 @@ public class SkyboxBlender : MonoBehaviour
             if (skyboxBlenderMaterial.GetFloat("_BlendCubemaps") >= totalBlendValue) {
                 StopAllCoroutines();
                 blend = false;
-                blendValue = 0f;
+                //blendValue = 0f;
                 
                 skyboxBlenderMaterial.SetFloat("_BlendCubemaps", totalBlendValue);
-                skyboxBlenderMaterial.SetFloat("_BlendCubemaps", 0f);
+                //skyboxBlenderMaterial.SetFloat("_BlendCubemaps", 0f);
                 
                 skyboxBlenderMaterial.SetTexture("_Tex", skyboxMaterials[index].GetTexture("_Tex"));
                 skyboxBlenderMaterial.SetColor("_Tint", skyboxMaterials[index].GetColor("_Tint"));
@@ -139,10 +140,10 @@ public class SkyboxBlender : MonoBehaviour
             if (skyboxBlenderMaterial.GetFloat("_BlendCubemaps") >= totalBlendValue) {
                 StopAllCoroutines();
                 singleBlending = false;
-                blendValue = 0f;
+                //blendValue = 0f;
                 
                 skyboxBlenderMaterial.SetFloat("_BlendCubemaps", totalBlendValue);
-                skyboxBlenderMaterial.SetFloat("_BlendCubemaps", 0f);
+                //skyboxBlenderMaterial.SetFloat("_BlendCubemaps", 0f);
                 
                 skyboxBlenderMaterial.SetTexture("_Tex", skyboxMaterials[index].GetTexture("_Tex"));
                 skyboxBlenderMaterial.SetColor("_Tint", skyboxMaterials[index].GetColor("_Tint"));
@@ -164,10 +165,10 @@ public class SkyboxBlender : MonoBehaviour
 
                 StopAllCoroutines();
                 notSameTex = false;
-                blendValue = 0f;
+                //blendValue = 0f;
                 
                 skyboxBlenderMaterial.SetFloat("_BlendCubemaps", totalBlendValue);
-                skyboxBlenderMaterial.SetFloat("_BlendCubemaps", 0f);
+                //skyboxBlenderMaterial.SetFloat("_BlendCubemaps", 0f);
 
                 skyboxBlenderMaterial.SetTexture("_Tex", skyboxMaterials[0].GetTexture("_Tex"));
                 skyboxBlenderMaterial.SetTexture("_Tex2", skyboxMaterials[1].GetTexture("_Tex"));
@@ -203,6 +204,8 @@ public class SkyboxBlender : MonoBehaviour
                 skyboxBlenderMaterial.SetColor("_Tint", RenderSettings.skybox.GetColor("_Tint"));
             }
         }
+
+        
     }
 
     //trigger the skybox blend

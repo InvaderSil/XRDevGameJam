@@ -22,7 +22,7 @@ public class StarManager : MonoBehaviour
 
             if (localStar == null)
             {
-                Debug.Log("localStar is null");
+                //Debug.Log("localStar is null");
                 continue;
             }
 

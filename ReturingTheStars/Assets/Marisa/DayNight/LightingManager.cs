@@ -27,6 +27,8 @@ public class LightingManager : MonoBehaviour
 
     [SerializeField] public float sunriseTime;
 
+    [SerializeField] private TryAgainManager m_tryAgainManager;
+
     public SkyboxBlender skyboxScript;
 
     [SerializeField] private AudioClip roosterSound;
@@ -35,6 +37,11 @@ public class LightingManager : MonoBehaviour
 
     public GameObject ObjectsToFade;
     private bool faded;
+
+
+    private bool m_skyBoxBlended = false;
+
+    private bool m_showingTryAgainUI = false;
 
     private GameObject[] stars;
 
@@ -50,6 +57,13 @@ public class LightingManager : MonoBehaviour
         roosterCrowed = false;
 
         faded = false;
+
+        
+    }
+
+    private void Awake()
+    {
+        skyboxScript.StopSkyboxBlend(true);
     }
 
     private void Update()
@@ -61,24 +75,19 @@ public class LightingManager : MonoBehaviour
         if (Application.isPlaying)
         {
             TimeOfDay += Time.deltaTime * timeMultiplier;
+            //Debug.Log("TimeOfDay1 = " + TimeOfDay);
             TimeOfDay %= 24; //clamp between 0-24
+
+            //Debug.Log("TimeOfDay2 = " + TimeOfDay);
             UpdateLighting( TimeOfDay / 24f );
 
             if ( TimeOfDay >= sunriseTime )
             {
-                skyboxScript.SkyboxBlend();
+                HandleSkyBoxBlending();
+                HandleFadingObjects();
+                HandleAudio();
 
-                if (!faded)
-                {
-                    FadeOutObject();
-                    FadeStars();
-                    faded = true;
-                }
-                if (!roosterCrowed)
-                {
-                    ProcessAudioPlay();
-                    roosterCrowed = true;
-                }
+                HandleRetry();
             }
         }
         else
@@ -92,8 +101,50 @@ public class LightingManager : MonoBehaviour
         }
     }
 
+    private void HandleAudio()
+    {
+        if (!roosterCrowed)
+        {
+            ProcessAudioPlay();
+            roosterCrowed = true;
+        }
+    }
+
+    private void HandleFadingObjects()
+    {
+        if (!faded)
+        {
+            FadeOutObject();
+            FadeStars();
+            faded = true;
+        }
+    }
+
+    private void HandleSkyBoxBlending()
+    {
+        if (!m_skyBoxBlended)
+        {
+            skyboxScript.SkyboxBlend();
+            m_skyBoxBlended = true;
+        }
+        
+    }
+
+    private void HandleRetry()
+    {
+        if (!m_showingTryAgainUI)
+        {
+            m_showingTryAgainUI = true;
+
+            m_tryAgainManager.EnableUI();
+        }
+         
+    }
+
     private void UpdateLighting(float timePercent)
     {
+        //Debug.Log("TimePercent = " + timePercent);
+
         RenderSettings.fogColor = Preset.FogColor.Evaluate(timePercent);
 
         if (DirectionalLight != null)
@@ -140,7 +191,7 @@ public class LightingManager : MonoBehaviour
         else
         {
             m_audioSource.clip = roosterSound;
-            m_audioSource.PlayDelayed(3f);
+            m_audioSource.PlayDelayed(1f);
         }
     }
 
@@ -160,10 +211,10 @@ public class LightingManager : MonoBehaviour
                     //make it a transparent one?
                     m.CopyPropertiesFromMaterial(fadeMaterial);
                     m.DOFade(0, 5f);
-                    Destroy(this, 5f);
+                    //Destroy(this, 5f);
                 }
                 m.DOFade(0, 3f);
-                Destroy(this, 5f);
+                //Destroy(this, 5f);
             }
         }
     }

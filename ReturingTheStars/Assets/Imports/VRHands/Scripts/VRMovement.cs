@@ -44,7 +44,7 @@ public class VRMovement : MonoBehaviour
         {
             if (m_audioSource == null)
             {
-                Debug.LogError("The AudioSource in the player NULL!");
+                Debug.Log("The AudioSource in the player NULL!");
             }
             else
             {
