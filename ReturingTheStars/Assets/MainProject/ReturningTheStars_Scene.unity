@@ -15775,7 +15775,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8747786308599932583, guid: 5c159955f10efd3418d09d334bc73404, type: 3}
       propertyPath: sunriseTime
-      value: 1
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8747786308599932583, guid: 5c159955f10efd3418d09d334bc73404, type: 3}
       propertyPath: fadeMaterial
@@ -15785,6 +15785,10 @@ PrefabInstance:
       propertyPath: ObjectsToFade
       value: 
       objectReference: {fileID: 1379016536}
+    - target: {fileID: 8747786308599932602, guid: 5c159955f10efd3418d09d334bc73404, type: 3}
+      propertyPath: m_Volume
+      value: 0.551
+      objectReference: {fileID: 0}
     - target: {fileID: 8747786309459404272, guid: 5c159955f10efd3418d09d334bc73404, type: 3}
       propertyPath: m_Color.b
       value: 0.0024029901

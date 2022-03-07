@@ -135,7 +135,7 @@ public class LightingManager : MonoBehaviour
         else
         {
             m_audioSource.clip = roosterSound;
-            m_audioSource.Play();
+            m_audioSource.PlayDelayed(4.5f);
         }
     }
 
@@ -155,10 +155,12 @@ public class LightingManager : MonoBehaviour
                     //make it a transparent one?
                     m.CopyPropertiesFromMaterial(fadeMaterial);
                     m.DOFade(0, 5f);
+                    Destroy(this, 5f);
                 }
                 m.DOFade(0, 3f);
+                Destroy(this, 5f);
             }
-            }
+        }
     }
 
     private void FadeStars()
@@ -178,7 +180,7 @@ public class LightingManager : MonoBehaviour
                         //make it a transparent one?
                         m.CopyPropertiesFromMaterial(fadeMaterial);
                         m.DOFade(0, 4f);
-
+                        Destroy(this, 5f);
                     }
                 }
             }
