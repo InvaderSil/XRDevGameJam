@@ -8,6 +8,8 @@ using DG.Tweening;
 [ExecuteAlways]
 public class LightingManager : MonoBehaviour
 {
+    protected virtual bool DoubleBuffered { get; set; }
+
     //References
     [SerializeField] private Light DirectionalLight;
     [SerializeField] private LightPreset Preset;
@@ -36,11 +38,16 @@ public class LightingManager : MonoBehaviour
     private bool faded;
     //private DG.Tweening.Core.TweenerCore<Color, Color, DG.Tweening.Plugins.Options.ColorOptions> m_dotweener;
 
-    public GameObject StarSpawners;
+    //public GameObject StarSpawners;
     private GameObject[] stars;
+    //private GameObject[] particles;
+
+    public Material fadeMaterial;
 
     private void Start()
     {
+        DoubleBuffered = true;
+
         TimeOfDay = startHour;
 
         m_audioSource = GetComponent<AudioSource>();
@@ -64,23 +71,44 @@ public class LightingManager : MonoBehaviour
             if ( TimeOfDay >= sunriseTime )
             {
                 skyboxScript.SkyboxBlend();
-                Destroy(StarSpawners.gameObject);
-
-                stars = GameObject.FindGameObjectsWithTag("star");
-                foreach(GameObject star in stars)
-                {
-                    Destroy(star.gameObject);
-                }
-                Debug.LogError("Destroy Stars");
 
                 if (!faded)
                 {
                     FadeOutObject();
+
+                    stars = GameObject.FindGameObjectsWithTag("star");
+                    //particles = GameObject.FindGameObjectsWithTag("particles");
+
+                    foreach (GameObject star in stars)
+                    {
+                        //foreach (GameObject particle in particles)
+                        //{
+                        //    Destroy(particles.gameObject, 2);
+                        //}
+                        MeshRenderer[] meshRenderers = star.GetComponentsInChildren<MeshRenderer>();
+                        foreach (MeshRenderer mr in meshRenderers)
+                        {
+                            Material[] materials = mr.materials;
+                            foreach (Material m in materials)
+                            {
+                                if (m.shader != null)
+                                {
+                                    //make it a transparent one?
+                                    m.CopyPropertiesFromMaterial(fadeMaterial);
+                                    m.DOFade(0, 3f);
+
+                                }
+                            }
+                        }
+                        //if(faded == true)
+                        //{
+                        //    Destroy(star.gameObject, 4f);
+                        //}
+                    }
                     faded = true;
                 }
                 if (!roosterCrowed)
                 {
-                    Debug.Log("PLAY THE DAMN SOUND");
                     ProcessAudioPlay();
                     roosterCrowed = true;
                 }
@@ -158,12 +186,14 @@ public class LightingManager : MonoBehaviour
             Material[] materials = mr.materials;
             foreach(Material m in materials)
             {
-                m.DOFade(0, 3f);
+                if (m.shader != null)
+                {
+                    //make it a transparent one?
+                    m.CopyPropertiesFromMaterial(fadeMaterial);
+                    m.DOFade(0, 3f);
+                }
 
-                //if (m.shader != null)
-                //{
-                //    // make it a transparent one?
-                //    //m.shader = transparent;
+                m.DOFade(0, 3f);
 
                 //    if (m.HasProperty("_Color"))
                 //    {
@@ -176,6 +206,6 @@ public class LightingManager : MonoBehaviour
                 //    m.DOFade(0, 3f);
                 //}
             }
-        }
+            }
     }
 }
