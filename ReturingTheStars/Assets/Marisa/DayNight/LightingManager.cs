@@ -33,14 +33,10 @@ public class LightingManager : MonoBehaviour
     private AudioSource m_audioSource;
     private bool roosterCrowed;
 
-    //public float fadeSpeed;
     public GameObject ObjectsToFade;
     private bool faded;
-    //private DG.Tweening.Core.TweenerCore<Color, Color, DG.Tweening.Plugins.Options.ColorOptions> m_dotweener;
 
-    //public GameObject StarSpawners;
     private GameObject[] stars;
-    //private GameObject[] particles;
 
     public Material fadeMaterial;
 
@@ -75,36 +71,7 @@ public class LightingManager : MonoBehaviour
                 if (!faded)
                 {
                     FadeOutObject();
-
-                    stars = GameObject.FindGameObjectsWithTag("star");
-                    //particles = GameObject.FindGameObjectsWithTag("particles");
-
-                    foreach (GameObject star in stars)
-                    {
-                        //foreach (GameObject particle in particles)
-                        //{
-                        //    Destroy(particles.gameObject, 2);
-                        //}
-                        MeshRenderer[] meshRenderers = star.GetComponentsInChildren<MeshRenderer>();
-                        foreach (MeshRenderer mr in meshRenderers)
-                        {
-                            Material[] materials = mr.materials;
-                            foreach (Material m in materials)
-                            {
-                                if (m.shader != null)
-                                {
-                                    //make it a transparent one?
-                                    m.CopyPropertiesFromMaterial(fadeMaterial);
-                                    m.DOFade(0, 3f);
-
-                                }
-                            }
-                        }
-                        //if(faded == true)
-                        //{
-                        //    Destroy(star.gameObject, 4f);
-                        //}
-                    }
+                    FadeStars();
                     faded = true;
                 }
                 if (!roosterCrowed)
@@ -177,9 +144,6 @@ public class LightingManager : MonoBehaviour
     {
         Shader transparent = Shader.Find("Transparent/Diffuse");
 
-        //Renderer rend = ObjectsToFade.transform.GetComponent<Renderer>();
-        //m_dotweener = rend.material.DOFade(0, 3f);
-
         MeshRenderer[] meshRenderers = ObjectsToFade.GetComponentsInChildren<MeshRenderer>();
         foreach(MeshRenderer mr in meshRenderers)
         {
@@ -192,20 +156,32 @@ public class LightingManager : MonoBehaviour
                     m.CopyPropertiesFromMaterial(fadeMaterial);
                     m.DOFade(0, 3f);
                 }
-
                 m.DOFade(0, 3f);
+            }
+            }
+    }
 
-                //    if (m.HasProperty("_Color"))
-                //    {
-                //        Debug.Log("Shader!");
-                //    }
-                //}
-                //else
-                //{
-                //    Debug.Log("Regular Material Fade Out");
-                //    m.DOFade(0, 3f);
-                //}
+    private void FadeStars()
+    {
+        stars = GameObject.FindGameObjectsWithTag("star");
+
+        foreach (GameObject star in stars)
+        {
+            MeshRenderer[] meshRenderers = star.GetComponentsInChildren<MeshRenderer>();
+            foreach (MeshRenderer mr in meshRenderers)
+            {
+                Material[] materials = mr.materials;
+                foreach (Material m in materials)
+                {
+                    if (m.shader != null)
+                    {
+                        //make it a transparent one?
+                        m.CopyPropertiesFromMaterial(fadeMaterial);
+                        m.DOFade(0, 3f);
+
+                    }
+                }
             }
-            }
+        }
     }
 }
