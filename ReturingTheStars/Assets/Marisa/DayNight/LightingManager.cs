@@ -135,7 +135,7 @@ public class LightingManager : MonoBehaviour
         else
         {
             m_audioSource.clip = roosterSound;
-            m_audioSource.PlayDelayed(4.5f);
+            m_audioSource.PlayDelayed(3f);
         }
     }
 
