@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class stopParticlesOnParentNull : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
-        
-    }
+        //Unparent the effect
+        if(this.transform.parent = null)
+        {
+            UnityEngine.Debug.Log("noparent");
+        }
+        //Stop emitting particles
+        //this.Stop();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        //Start coroutine that will check if all remaining particles are gone
     }
 }

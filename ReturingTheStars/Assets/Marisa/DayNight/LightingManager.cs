@@ -154,7 +154,7 @@ public class LightingManager : MonoBehaviour
                 {
                     //make it a transparent one?
                     m.CopyPropertiesFromMaterial(fadeMaterial);
-                    m.DOFade(0, 3f);
+                    m.DOFade(0, 5f);
                 }
                 m.DOFade(0, 3f);
             }
@@ -177,7 +177,7 @@ public class LightingManager : MonoBehaviour
                     {
                         //make it a transparent one?
                         m.CopyPropertiesFromMaterial(fadeMaterial);
-                        m.DOFade(0, 3f);
+                        m.DOFade(0, 4f);
 
                     }
                 }
