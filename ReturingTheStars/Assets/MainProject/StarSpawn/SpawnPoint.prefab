@@ -78,6 +78,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_spawnLocation: {fileID: 6266969687423238019}
   m_starPrefab: {fileID: 4347242937845470256, guid: a4e8df9b63c191740bdcf27537990125, type: 3}
+  childOf: {fileID: 6266969688741188763}
 --- !u!1 &6266969689012889537
 GameObject:
   m_ObjectHideFlags: 0

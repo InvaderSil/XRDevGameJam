@@ -15787,7 +15787,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8747786308599932583, guid: 5c159955f10efd3418d09d334bc73404, type: 3}
       propertyPath: sunriseTime
-      value: 8
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8747786308599932583, guid: 5c159955f10efd3418d09d334bc73404, type: 3}
       propertyPath: fadeMaterial

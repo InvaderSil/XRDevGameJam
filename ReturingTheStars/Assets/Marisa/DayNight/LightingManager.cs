@@ -85,6 +85,11 @@ public class LightingManager : MonoBehaviour
         {
             UpdateLighting( TimeOfDay / 24f );
         }
+        if(faded == true)
+        {
+            //Debug.Log("DESTROY EVERYTHING~!!!!! please");
+            //Destroy(ObjectsToFade, 5f);
+        }
     }
 
     private void UpdateLighting(float timePercent)
@@ -180,7 +185,7 @@ public class LightingManager : MonoBehaviour
                         //make it a transparent one?
                         m.CopyPropertiesFromMaterial(fadeMaterial);
                         m.DOFade(0, 4f);
-                        Destroy(this, 5f);
+                        Destroy(star, 4f);
                     }
                 }
             }
